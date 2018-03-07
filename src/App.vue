@@ -3,13 +3,22 @@
     <div class="col-md-8 mx-auto">
       <h1 class="text-center">Task MANAGER</h1>
       <ul class="list-group">
-        <li @click="removeNote(index)" class="list-group-item" v-for="(note, index) in notes" :key="index">{{ index + 1 }} - {{ note }}</li>
+        <transition-group enter-active-class="animated slideInLeft" leave-active-class="animated slideOutRight" mode="out-in">
+          <li
+            @click="removeNote(index)" 
+            class="list-group-item" 
+            v-for="(note, index) in notes" 
+            :key="note">
+            {{ index + 1 }} - {{ note }}
+          </li>
+        </transition-group>  
       </ul>
       <hr>
       <form>
         <div class="form-group">
           <input class="form-control" type="text" placeholder="Add task..." v-model="myNote">
           <button class="btn btn-block btn-success mt-2" @click.prevent="addNote">Add Task</button>
+          <button class="btn btn-block btn-danger mt-1" @click.prevent="clearNotes">Clear Tasks</button>
         </div>
       </form>
     </div>
@@ -39,11 +48,20 @@
   			} else {
   				alert("You have no notes left!");
   			}
+  		},
+  		clearNotes() {
+  			if (this.notes.length == 0) {
+  				alert("You have no notes.");
+  			} else {
+  				this.notes = [];
+  			}
   		}
   	}
   };
 </script>
 
+
 <style>
 
 </style>
+
