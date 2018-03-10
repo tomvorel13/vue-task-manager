@@ -1,14 +1,21 @@
 <template>
   <li 
     class="list-group-item"
-    @click="deleteTask(index)">
+   >
     {{ index + 1 }} - {{ note }}
+  <button 
+    type="button" 
+    class="close" 
+    aria-label="Close"
+    @click="deleteTask(index)">
+    <span aria-hidden="true">&times;</span>
+  </button>
   </li>
 </template>
 
 <script>
-export default {
-  props: ['note', 'index', 'deleteTask']
-}
+  export default {
+  	props: ["note", "index", "deleteTask"]
+  };
 </script>
 

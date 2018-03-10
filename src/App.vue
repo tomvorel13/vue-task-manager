@@ -2,7 +2,12 @@
   <div class="container">
     <div class="col-md-8 mx-auto">
       <h1 class="text-center">Task MANAGER</h1>
-			<app-alert v-show="showAlert" :notesArray="notes"></app-alert>
+			<transition enter-active-class="animated slideInUp" leave-active-class="animated fadeOut" mode="out-in">
+				<app-alert 
+				v-show="showAlert" 
+				:notesArray="notes"
+				:isInputEmpty="isInputEmpty"></app-alert>
+			</transition>
       <ul class="list-group">
         <transition-group enter-active-class="animated slideInLeft" leave-active-class="animated slideOutRight" mode="out-in">
           <app-task 
@@ -35,6 +40,7 @@
 			return {
 				myNote: "",
 				notes: [],
+				isInputEmpty: false,
 				showAlert: false
 			};
 		},
@@ -42,6 +48,7 @@
 			addNote() {
 				if (this.myNote == "") {
 					this.showAlert = true;
+					this.isInputEmpty = true;
 				} else {
 					this.showAlert = false;
 					this.notes.push(this.myNote);
@@ -56,8 +63,9 @@
 				}
 			},
 			clearNotes() {
-				if (this.notes.length == 0) {
+				if (this.notes.length == 0 || this.addN == true) {
 					this.showAlert = true;
+					this.isInputEmpty = false;
 				} else {
 					this.notes = [];
 				}
