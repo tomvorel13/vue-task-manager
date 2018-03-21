@@ -2,7 +2,7 @@
   <li 
     class="list-group-item"
    >
-    {{ index + 1 }} - {{ note }}
+    {{ index + 1}} - {{ note }}
   <button 
     type="button" 
     class="close" 
