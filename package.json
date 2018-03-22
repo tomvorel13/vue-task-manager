@@ -12,6 +12,7 @@
   "dependencies": {
     "animate.css": "^3.6.1",
     "bootstrap": "^4.0.0",
+    "firebase": "^4.12.0",
     "vue": "^2.5.11"
   },
   "browserslist": [

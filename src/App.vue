@@ -34,6 +34,7 @@
 <script>
 	import Alert from "./components/Alert.vue";
 	import Task from "./components/Task.vue";
+	import * as firebase from 'firebase';
 
 	export default {
 		data() {
@@ -50,10 +51,15 @@
 					this.showAlert = true;
 					this.isInputEmpty = true;
 				} else {
+					let todo = this.myNote;
 					this.showAlert = false;
-					this.notes.push(this.myNote);
+					this.notes.push(todo);
+					firebase.database().ref('todos').push(todo)
+						.then(data => console.log(data))
+						.catch(error => console.log(error));
 					this.myNote = "";
 				}
+				
 			},
 			removeNote(index) {
 				if (this.notes.length > 0) {
