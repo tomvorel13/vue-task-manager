@@ -12,7 +12,7 @@
         <transition-group enter-active-class="animated slideInLeft" leave-active-class="animated slideOutRight" mode="out-in">
           <app-task 
             v-for="(note, index) in notes" 
-            :key="note"
+            :key="index"
 						:note="note"
 						:index="index"
 						:deleteTask="removeNote" >
@@ -32,6 +32,9 @@
 </template>
 
 <script>
+	import axios from "axios";
+
+	//Components
 	import Alert from "./components/Alert.vue";
 	import Task from "./components/Task.vue";
 	import * as firebase from "firebase";
