@@ -34,7 +34,7 @@
 <script>
 	import Alert from "./components/Alert.vue";
 	import Task from "./components/Task.vue";
-	import * as firebase from 'firebase';
+	import * as firebase from "firebase";
 
 	export default {
 		data() {
@@ -54,16 +54,23 @@
 					let todo = this.myNote;
 					this.showAlert = false;
 					this.notes.push(todo);
-					firebase.database().ref('todos').push(todo)
+					firebase
+						.database()
+						.ref("todos")
+						.push(todo)
 						.then(data => console.log(data))
 						.catch(error => console.log(error));
 					this.myNote = "";
 				}
-				
 			},
 			removeNote(index) {
 				if (this.notes.length > 0) {
 					this.notes.splice(index, 1);
+					let newData = this.notes;
+					firebase
+						.database()
+						.ref("todos")
+						.set(newData);
 				} else {
 					alert("You have no notes left!");
 				}
@@ -74,12 +81,32 @@
 					this.isInputEmpty = false;
 				} else {
 					this.notes = [];
+					firebase
+						.database()
+						.ref("todos")
+						.remove();
 				}
 			}
 		},
 		components: {
 			appAlert: Alert,
 			appTask: Task
+		},
+		created() {
+			let data_list = [];
+			firebase
+				.database()
+				.ref("todos")
+				.once("value")
+				.then(snapshot => {
+					snapshot.forEach(childSnapshot => {
+						var key = childSnapshot.key;
+						var childData = childSnapshot.val();
+						data_list.push(childData);
+					});
+					console.log(data_list, data_list.length);
+					this.notes = data_list;
+				});
 		}
 	};
 </script>
