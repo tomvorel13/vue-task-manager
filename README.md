@@ -1,6 +1,8 @@
 # task-manager
 
-> A Vue.js project
+Very simple todo application created with Vue.js. The App is hooked up to a Firebase backend, so all the tasks added are being stored to a cloud database.
+
+This was created mainly for learning purposes. (Vue.js ROCKS btw)
 
 ## Build Setup
 
@@ -15,4 +17,3 @@ npm run dev
 npm run build
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
